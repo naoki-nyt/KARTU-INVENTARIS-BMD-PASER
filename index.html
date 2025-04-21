@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>QR Code PDF Generator</title>
+  <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+  <style>
+    body { font-family: sans-serif; padding: 20px; }
+    .qr { margin-top: 20px; }
+    input { padding: 8px; width: 300px; }
+  </style>
+</head>
+<body>
+  <h2>Buat QR Code PDF Permanen (Google Drive)</h2>
+  <label>Nama File Redirect: </label>
+  <input type="text" id="filename" placeholder="contoh: laporan-2025" />
+  <button onclick="generateQR()">Buat QR</button>
+
+  <div class="qr" id="qrcode"></div>
+
+  <script>
+    function generateQR() {
+      const filename = document.getElementById("filename").value.trim();
+      if (!filename) return alert("Masukkan nama file dulu!");
+
+      const redirectURL = `https://naoki-nyt.github.io/qr-pdf-viewer/redirects/${filename}.html`;
+      
+      document.getElementById("qrcode").innerHTML = "";
+
+      QRCode.toCanvas(document.createElement('canvas'), redirectURL, function (error, canvas) {
+        if (error) console.error(error);
+        document.getElementById("qrcode").appendChild(canvas);
+      });
+    }
+  </script>
+</body>
+</html>
