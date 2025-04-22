@@ -3,43 +3,51 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Bagian Umum SETDA Kabupaten Paser</title>
+  <title>QR Generator | Bagian Umum SETDA Paser</title>
   <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
-      padding: 20px;
+      margin: 0;
+      padding: 0;
+      background: url('background.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
+    }
+
+    main {
+      background: rgba(0, 0, 0, 0.6);
+      padding: 30px;
       max-width: 600px;
-      margin: auto;
-      background: #f9f9f9;
+      margin: 50px auto;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
       text-align: center;
     }
 
     header img {
       width: 80px;
-      height: auto;
       margin-bottom: 10px;
     }
 
     header h1 {
-      margin: 0;
-      font-size: 1.6rem;
-      color: #333;
+      margin: 5px 0;
     }
 
     input {
       padding: 10px;
       width: 100%;
-      max-width: 500px;
       margin-top: 20px;
       font-size: 16px;
+      border-radius: 6px;
+      border: none;
     }
 
     button {
       margin-top: 10px;
       padding: 10px 20px;
       font-size: 16px;
-      background: #0077cc;
+      background: #00aaff;
       color: white;
       border: none;
       cursor: pointer;
@@ -53,32 +61,33 @@
     footer {
       margin-top: 40px;
       font-size: 14px;
-      color: #888;
+      color: #ccc;
     }
   </style>
 </head>
 <body>
-  <header>
-    <img src="logo PASER.png" alt="Kartu Inventaris BMD Paser" />
-    <h1>Bagian Umum SETDA Kabupaten Paser</h1>
-    <h1>QR Generator</h1>
-  </header>
+  <main>
+    <header>
+      <img src="logo PASER.png" alt="Logo Paser" />
+      <h1>Bagian Umum SETDA Kabupaten Paser</h1>
+      <h2>QR Code Generator</h2>
+    </header>
 
-  <p>Tempelkan link folder Google Drive kamu di bawah ini untuk membuat QR Code:</p>
+    <p>Tempelkan link folder Google Drive kamu di bawah ini untuk membuat QR Code:</p>
+    <input type="text" id="folderurl" placeholder="https://drive.google.com/drive/folders/..." />
+    <button onclick="generateQR()">Buat QR</button>
 
-  <input type="text" id="folderurl" placeholder="https://drive.google.com/drive/folders/..." />
-  <button onclick="generateQR()">Buat QR</button>
+    <div class="qr" id="qrcode"></div>
 
-  <div class="qr" id="qrcode"></div>
-
-  <footer>
-    &copy; <span id="year"></span> Naoki-NYT | Fiqi Personal Tools
-  </footer>
+    <footer>
+      &copy; <span id="year"></span> Naoki-NYT | Fiqi Personal Tools
+    </footer>
+  </main>
 
   <script>
     function generateQR() {
       const folderURL = document.getElementById("folderurl").value.trim();
-      if (!folderURL.startsWith("http")) return alert("Masukkan link folder GDrive yang valid.");
+      if (!folderURL.startsWith("http")) return alert("Masukkan link Google Drive yang valid.");
 
       document.getElementById("qrcode").innerHTML = "";
 
@@ -88,7 +97,7 @@
       });
     }
 
-    // Set tahun footer otomatis
+    // Set tahun otomatis
     document.getElementById("year").textContent = new Date().getFullYear();
   </script>
 </body>
